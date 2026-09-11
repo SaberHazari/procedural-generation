@@ -15,7 +15,7 @@ RELEASE_DIR := $(BUILD_DIR)/release
 RELEASE_OBJ_DIR := $(RELEASE_DIR)/obj
 
 # Compiler Flags
-COMMON_FLAGS = -Wall -Wextra -std=c17
+COMMON_FLAGS = -Wall -Wextra -std=c17 -Isrc/
 DEBUG_FLAGS = $(COMMON_FLAGS) -g -O0
 RELEASE_FLAGS = $(COMMON_FLAGS) -O2
 
