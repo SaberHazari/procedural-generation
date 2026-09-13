@@ -2,7 +2,7 @@
 CC = clang
 
 # Libraries
-LIBS = 
+LIBS = -lm
 
 # Directories
 # Directory for Android CxStudio

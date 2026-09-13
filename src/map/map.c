@@ -1,5 +1,5 @@
 #include "map.h"
-#include <stdlib.h>
+#include <math.h>
 
 static void generate_noise_map(MapInfo *map_info, f32 *noise_map) {
     if(map_info->scale <= 0.0f) { map_info->scale = 0.0001f; }
@@ -60,6 +60,22 @@ static u8 noise_index_for_height(f32 h) {
     return (u8)(count - 1);
 }
 
+static inline f32 falloff_curve(f32 v) {
+    const f32 a = 3.0f;
+    const f32 b = 2.2f;
+    f32 va = powf(v, a);
+    f32 vb = powf(b - b * v, a);
+    return va / (va + vb);
+}
+
+static inline f32 falloff_value(i32 x, i32 y, i32 width, i32 height) {
+    f32 nx = (f32)x / (f32)width * 2.0f - 1.0f;
+    f32 ny = (f32)y / (f32)height * 2.0f - 1.0f;
+    f32 v = fmaxf(fabsf(nx), fabsf(ny));
+    if(v > 1.0f) { v = 1.0f; }
+    return falloff_curve(v);
+}
+
 u8 *build_map(MapInfo *map_info) {
     f32 *noise_map = (f32 *)calloc((size_t)(map_info->map_w * map_info->map_h), 
         sizeof(f32));
@@ -69,7 +85,8 @@ u8 *build_map(MapInfo *map_info) {
     for(i32 y = 0; y < map_info->map_h; ++y) {
         for(i32 x = 0; x < map_info->map_w; ++x) {
             i32 idx = y * map_info->map_w + x;
-            f32 h = noise_map[idx];
+            f32 h = noise_map[idx] - falloff_value(x, y, 
+                map_info->map_w, map_info->map_h);
             if(h < 0.0f) { h = 0.0f; }
             if(h > 1.0f) { h = 1.0f; }
             map[idx] = noise_index_for_height(h);
@@ -78,6 +95,11 @@ u8 *build_map(MapInfo *map_info) {
     
     free(noise_map);
     return map;
+}
+
+static inline u8 color_f32_to_u8(f32 color) {
+    u8 result = (u8)(color * 255.0f);
+    return result;
 }
 
 void render_viewport(MapInfo *map_info, const u8 *map, 

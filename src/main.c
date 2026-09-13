@@ -1,6 +1,5 @@
 #include "file_writer/file_writer.h"
 #include "map/map.h"
-#include <stdlib.h>
 #include <stdio.h>
 
 int main() {
@@ -20,6 +19,8 @@ int main() {
     u8 *map = build_map(&map_info);
     u8 *image = (u8 *)calloc((size_t)(map_info.viewport_w * 
         map_info.viewport_h * 3), sizeof(u8));
+    render_viewport(&map_info, map, image);
+    
     bmp_writer("output/bmp/map.bmp", map_info.viewport_w, 
         map_info.viewport_h, image);
     
