@@ -1,4 +1,5 @@
 #include "noise.h"
+#include <math.h>
 
 static const u8 PERM[256] = {
     151,160,137, 91, 90, 15,131, 13,201, 95, 96, 53,194,233,  7,225,
@@ -29,14 +30,6 @@ static void init_perlin(void) {
         permutation[256 + i] = PERM[i];
     }
     perlin_initialized = true;
-}
-
-static inline f32 fade(f32 t) {
-    return t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
-}
-
-static inline f32 lerp(f32 t, f32 a, f32 b) {
-    return a + t * (b - a);
 }
 
 static const f32 GRAD_X[8] = {
