@@ -6,6 +6,8 @@
 
 #define ONE_BY_ROOT_TWO 0.70710678f
 
+#define array_count(arr) (sizeof(arr) / sizeof((arr)[0]))
+
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;

@@ -1,7 +1,7 @@
 #ifndef LINALG_H
 #define LINALG_H
 
-#include "utils.h"
+#include "utils/utils.h"
 
 typedef struct Vec3 {
 				f32 x, y, z;
