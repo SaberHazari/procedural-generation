@@ -9,10 +9,8 @@
 #define MAX_OCTAVES 16
 
 typedef struct MapInfo {
-    i32 map_w;
-    i32 map_h;
-    i32 viewport_w;
-    i32 viewport_h;
+    i32 width;
+    i32 height;
     u32 seed;
     i32 octaves;
     f32 scale;
@@ -27,8 +25,15 @@ typedef struct CellInfo {
     Vec3 color;
 } CellInfo;
 
+typedef struct Viewport {
+    i32 width;
+    i32 height;
+    i32 offset_x;
+    i32 offset_y;
+} Viewport;
+
 u8 *build_map(MapInfo *map);
-void render_viewport(MapInfo *map_info, const u8 *map, 
-    u8 *image);
+void render_viewport(const MapInfo *map_info, 
+    const Viewport *viewport, const u8 *map, u8 *image);
 
 #endif // MAP_H
