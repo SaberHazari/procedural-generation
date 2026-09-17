@@ -8,10 +8,14 @@
 
 #define MAX_OCTAVES 16
 
+typedef struct MapSeeds {
+    u32 height;
+    u32 moisture;
+} MapSeeds;
+
 typedef struct MapInfo {
     i32 width;
     i32 height;
-    u32 seed;
     i32 octaves;
     f32 scale;
     f32 persistence;
@@ -20,11 +24,6 @@ typedef struct MapInfo {
     f32 offset_y;
 } MapInfo;
 
-typedef struct CellInfo {
-    f32 height;
-    Vec3 color;
-} CellInfo;
-
 typedef struct Viewport {
     i32 width;
     i32 height;
@@ -32,7 +31,7 @@ typedef struct Viewport {
     i32 offset_y;
 } Viewport;
 
-u8 *build_map(MapInfo *map);
+u8 *build_map(MapInfo *map, MapSeeds *map_seeds);
 void render_viewport(const MapInfo *map_info, 
     const Viewport *viewport, const u8 *map, u8 *image);
 
