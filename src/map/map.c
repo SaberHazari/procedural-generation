@@ -62,8 +62,11 @@ static const Vec3 BIOME_COLORS[BIOME_COUNT] = {
     [BIOME_SNOW]       = {0.96f, 0.97f, 0.98f}, 
 };
 
+#define ELEVATION_BANDS 3
+#define MOISTURE_BANDS  3
+
 // rows for elevation, cols for moisture
-static const BiomeId LAND_BIOME_TABLE[3][3] = {
+static const BiomeId LAND_BIOME_TABLE[ELEVATION_BANDS][MOISTURE_BANDS] = {
     { BIOME_DESERT,    BIOME_PLAINS, BIOME_SWAMP      }, 
     { BIOME_DRY_HILLS, BIOME_FOREST, BIOME_RAINFOREST }, 
     { BIOME_BARE_ROCK, BIOME_ROCKY,  BIOME_ALPINE     }, 
@@ -75,11 +78,11 @@ static u8 classify_cell(f32 h, f32 m) {
     if(h <= 0.45f)    { return BIOME_SHALLOW_WATER; }
     if(h <= land_min) { return BIOME_SAND;          }
     if(h > land_max)  { return BIOME_SNOW;          }
-    i32 elevation = (i32)(((h - land_min) / (land_max - land_min)) * 3);
-    if(elevation > 2) { elevation = 2; }
-    i32 moisture = (i32)(m * 3);
+    i32 elevation = (i32)(((h - land_min) / (land_max - land_min)) * ELEVATION_BANDS);
+    if(elevation >= ELEVATION_BANDS) { elevation = ELEVATION_BANDS - 1; }
+    i32 moisture = (i32)(m * MOISTURE_BANDS);
     if(moisture < 0) { moisture = 0; }
-    if(moisture > 2) { moisture = 2; }
+    if(moisture >= MOISTURE_BANDS) { moisture = MOISTURE_BANDS - 1; }
     return (u8)LAND_BIOME_TABLE[elevation][moisture];
 }
 
