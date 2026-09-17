@@ -78,6 +78,7 @@ static u8 classify_cell(f32 h, f32 m) {
     i32 elevation = (i32)(((h - land_min) / (land_max - land_min)) * 3);
     if(elevation > 2) { elevation = 2; }
     i32 moisture = (i32)(m * 3);
+    if(moisture < 0) { moisture = 0; }
     if(moisture > 2) { moisture = 2; }
     return (u8)LAND_BIOME_TABLE[elevation][moisture];
 }
