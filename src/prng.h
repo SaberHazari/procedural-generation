@@ -1,7 +1,7 @@
 #ifndef PRNG_H
 #define PRNG_H
 
-#include "proc_math/proc_math.h"
+#include "proc_math.h"
 
 typedef struct Prng {
     u32 state;
@@ -25,4 +25,4 @@ static inline f32 prng_range(Prng *r, f32 lo, f32 hi) {
     return lerp(t, lo, hi);
 }
 
-#endif // PRNG_H
+#endif

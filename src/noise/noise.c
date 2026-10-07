@@ -1,3 +1,4 @@
+#include "proc_math.h"
 #include "noise.h"
 #include <math.h>
 
@@ -21,7 +22,7 @@ static const u8 PERM[256] = {
 };
 
 static u8 permutation[512];
-static b32 perlin_initialized = false;
+static bool perlin_initialized = false;
 
 static void init_perlin(void) {
     if(perlin_initialized) return;

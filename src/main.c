@@ -1,5 +1,6 @@
 #include "file_writer/file_writer.h"
 #include "map/map.h"
+#include <stdlib.h>
 
 int main() {
     MapSeeds map_seeds;

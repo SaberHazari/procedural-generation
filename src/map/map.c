@@ -1,4 +1,8 @@
 #include "map.h"
+#include "noise/noise.h"
+#include "linalg.h"
+#include "prng.h"
+#include <stdlib.h>
 #include <math.h>
 
 static void generate_noise_map(MapInfo *map_info, u32 seed, f32 *noise_map) {

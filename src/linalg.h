@@ -1,0 +1,10 @@
+#ifndef LINALG_H
+#define LINALG_H
+
+#include "utils.h"
+
+typedef struct Vec3 {
+				f32 x, y, z;
+} Vec3;
+
+#endif

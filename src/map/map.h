@@ -1,10 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "linalg/linalg.h"
-#include "noise/noise.h"
-#include "prng/prng.h"
-#include <stdlib.h>
+#include "utils.h"
 
 #define MAX_OCTAVES 16
 
@@ -35,4 +32,4 @@ u8 *build_map(MapInfo *map, MapSeeds *map_seeds);
 void render_viewport(const MapInfo *map_info, 
     const Viewport *viewport, const u8 *map, u8 *image);
 
-#endif // MAP_H
+#endif
